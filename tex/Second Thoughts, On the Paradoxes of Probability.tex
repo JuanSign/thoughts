@@ -8,11 +8,14 @@
 \usepackage{titlesec}
 \usepackage{setspace}
 \usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{amsmath}
 
 % Formatting.
 \titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
 \onehalfspacing
+\setlist[enumerate,2]{label=\alph*., nosep}
 
 % Document...
 \begin{document}
@@ -27,7 +30,32 @@
 \end{center}
 
 \begin{enumerate}
-    \item \textbf{The Gambler's Dice.} Which is more likely: getting at least one six in four rolls of a single die, or getting at least one double six in twenty-four rolls of a pair of dice? What is the probability of each?
+    \item \textbf{The Gambler's Dice} (de Méré's Problem) \\
+    Which one is more likely?
+    \begin{enumerate}
+        \item Getting at least \textbf{one six} in \textbf{four rolls} of a single die.
+        \item Getting at least \textbf{one double six} in \textbf{twenty-four rolls} of a pair of dice.
+    \end{enumerate}
+    What is the probability of each?
+
+    \textit{First thought.} The numbers here do not look arbitrary. A double six is six times rarer than a single six, one chance in thirty-six instead of one in six. Rolling six times as often, twenty-four times instead of four, should make up for it. If so, the two should be equally likely.
+
+    \textit{Second thought.} A single roll of a die is guaranteed to land on a number from one to six. Landing on a six is one chance in six, six times rarer. Our first thought says six rolls should then guarantee a six. But we know they do not. Six rolls can easily pass without a single six.
+
+    So the intuition that something $n$ times rarer needs $n$ times as many attempts is wrong. But luckily, probability theory gives us a better way. One of its basic rules is that the probabilities of all possible outcomes add up to one, as long as no two can happen at once.
+
+    In four rolls, the number of sixes can only be zero, one, two, three or four, so
+    \[
+        P(\text{no six}) + P(\text{one six}) + \dots + P(\text{four sixes}) = 1.
+    \]
+    Instead of calculating four terms, we only need to calculate one, since
+    \[
+        P(\text{at least one six}) = 1 - P(\text{no six}).
+    \]
+    A single die misses a six with probability $5/6$, and a pair of dice misses a double six with probability $35/36$. The rolls do not affect each other, so
+    \[
+        \text{(a) } 1 - (5/6)^{4} \approx 51.8\% \qquad \text{(b) } 1 - (35/36)^{24} \approx 49.1\%.
+    \]
 
     \item \textbf{A Crowded Room.} How many people need to be in a room before there is a better-than-even chance that at least two of them share a birthday? And how many other people need to be in the room before there is a better-than-even chance that someone shares \textit{your} birthday? Ignore leap years and assume every day of the year is equally likely.
 
